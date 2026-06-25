@@ -1,0 +1,17 @@
+/* Custom Styles for IT Helpdesk */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 0.5rem;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}

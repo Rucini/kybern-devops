@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Environment Variables
+.env
+.flaskenv
+
+# Database
+instance/*
+!instance/.keep
+
+# Uploads
+uploads/*
+!uploads/.keep
+
+# Testing / Temporary
+ui_screenshots/
+.pytest_cache/
