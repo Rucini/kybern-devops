@@ -12,7 +12,7 @@
 
 <div class="row mb-4">
     <div class="col-md-4">
-        <div class="card text-white bg-warning mb-3">
+        <div class="card bg-warning mb-3">
             <div class="card-header">Open Tickets</div>
             <div class="card-body">
                 <h5 class="card-title display-4">{{ open_tickets }}</h5>
@@ -21,7 +21,7 @@
     </div>
     {% if current_user.is_admin %}
     <div class="col-md-4">
-        <div class="card text-white bg-info mb-3">
+        <div class="card bg-info mb-3">
             <div class="card-header">In Progress</div>
             <div class="card-body">
                 <h5 class="card-title display-4">{{ in_progress_tickets }}</h5>
@@ -30,7 +30,7 @@
     </div>
     {% endif %}
     <div class="col-md-4">
-        <div class="card text-white bg-success mb-3">
+        <div class="card bg-success mb-3">
             <div class="card-header">Resolved Tickets</div>
             <div class="card-body">
                 <h5 class="card-title display-4">{{ resolved_tickets }}</h5>
