@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, current_user
 from app.extensions import db
 from app.main import main_bp
 from app.models import Ticket
+from sqlalchemy import or_
 
 @main_bp.route('/dashboard', methods=['GET'])
 @jwt_required()
@@ -20,9 +21,9 @@ def dashboard():
             "recent_tickets": [t.to_dict() for t in recent_tickets]
         }), 200
     else:
-        my_open_tickets = Ticket.query.filter_by(user_id=current_user.id, status='Open').count()
-        my_resolved_tickets = Ticket.query.filter_by(user_id=current_user.id, status='Resolved').count()
-        recent_tickets = Ticket.query.filter_by(user_id=current_user.id).order_by(Ticket.created_at.desc()).limit(5).all()
+        my_open_tickets = Ticket.query.filter(or_(Ticket.user_id == current_user.id, Ticket.assigned_to == current_user.id), Ticket.status == 'Open').count()
+        my_resolved_tickets = Ticket.query.filter(or_(Ticket.user_id == current_user.id, Ticket.assigned_to == current_user.id), Ticket.status == 'Resolved').count()
+        recent_tickets = Ticket.query.filter(or_(Ticket.user_id == current_user.id, Ticket.assigned_to == current_user.id)).order_by(Ticket.created_at.desc()).limit(5).all()
         
         return jsonify({
             "open_tickets": my_open_tickets,

@@ -64,6 +64,17 @@ const TicketList = () => {
       key: 'priority',
     },
     {
+      title: 'Type',
+      key: 'type',
+      render: (_: any, record: any) => {
+        // If the ticket's author matches the assigned_to, or if we just want to know if they own it:
+        // Actually, we can just check if they are the creator or assignee based on local user ID, 
+        // but we don't have user context here directly without useAuth(). 
+        // Let's just show Assigned To:
+        return record.assignee_name ? <Tag color="purple">{record.assignee_name}</Tag> : <Tag>Unassigned</Tag>;
+      },
+    },
+    {
       title: 'Created At',
       dataIndex: 'created_at',
       key: 'created_at',

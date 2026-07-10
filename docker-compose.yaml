@@ -20,15 +20,13 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      tags:
+        - backend-v1
     restart: always
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgrespassword@db:5432/helpdesk
-      - SECRET_KEY=devops-super-secret-key-change-in-production
-      - JWT_SECRET_KEY=jwt-super-secret-key-change-in-production
-      - FLASK_ENV=development
-      - DEBUG=True
+    env_file:
+      - ./backend/.env
     volumes:
       - backend_uploads:/app/uploads
     depends_on:

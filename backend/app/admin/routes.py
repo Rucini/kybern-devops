@@ -84,7 +84,8 @@ def delete_ticket(ticket_id):
 @admin_required
 def get_users():
     page = request.args.get('page', 1, type=int)
-    pagination = User.query.order_by(User.id.asc()).paginate(page=page, per_page=15, error_out=False)
+    per_page = request.args.get('per_page', 15, type=int)
+    pagination = User.query.order_by(User.id.asc()).paginate(page=page, per_page=per_page, error_out=False)
     
     return jsonify({
         "items": [u.to_dict() for u in pagination.items],

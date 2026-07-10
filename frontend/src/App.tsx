@@ -9,7 +9,9 @@ import Dashboard from './pages/Dashboard';
 import TicketList from './pages/TicketList';
 import TicketCreate from './pages/TicketCreate';
 import TicketView from './pages/TicketView';
-
+import Profile from './pages/Profile';
+import AdminTickets from './pages/AdminTickets';
+import AdminUsers from './pages/AdminUsers';
 // Protected Route Component
 const ProtectedRoute = ({ children, adminOnly = false }: { children: ReactNode, adminOnly?: boolean }) => {
   const { user } = useAuth();
@@ -40,12 +42,12 @@ const App = () => {
               <Route path="tickets/create" element={<TicketCreate />} />
               <Route path="tickets/:id" element={<TicketView />} />
               
-              {/* Admin Routes - basic stubs for now */}
-              <Route path="admin/tickets" element={<ProtectedRoute adminOnly><Dashboard /></ProtectedRoute>} />
-              <Route path="admin/users" element={<ProtectedRoute adminOnly><Dashboard /></ProtectedRoute>} />
+              {/* Admin Routes */}
+              <Route path="admin/tickets" element={<ProtectedRoute adminOnly><AdminTickets /></ProtectedRoute>} />
+              <Route path="admin/users" element={<ProtectedRoute adminOnly><AdminUsers /></ProtectedRoute>} />
               
-              {/* Profile stub */}
-              <Route path="profile" element={<Dashboard />} />
+              {/* Profile route */}
+              <Route path="profile" element={<Profile />} />
             </Route>
           </Routes>
         </Router>

@@ -4,6 +4,7 @@ from flask_jwt_extended import jwt_required, current_user
 from app.extensions import db
 from app.tickets import tickets_bp
 from app.models import Ticket, Comment
+from sqlalchemy import or_
 from app.utils import save_attachment
 
 @tickets_bp.route('/', methods=['GET'])
@@ -12,7 +13,7 @@ def list_tickets():
     page = request.args.get('page', 1, type=int)
     status_filter = request.args.get('status')
     
-    query = Ticket.query.filter_by(user_id=current_user.id)
+    query = Ticket.query.filter(or_(Ticket.user_id == current_user.id, Ticket.assigned_to == current_user.id))
     
     if status_filter:
         query = query.filter_by(status=status_filter)
