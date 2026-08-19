@@ -1,0 +1,20 @@
+FROM python:3.14
+
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+RUN python init_db.py && python seed.py
+
+EXPOSE 8000
+
+CMD ["python", "run.py"]
+
+
+
+
