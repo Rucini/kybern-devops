@@ -13,7 +13,7 @@ jobs:
      build:
         runs-on: ubuntu-latest
         outputs:
-            sha_tags: ${{ steps.vars.outputs.sha_tags }}
+            sha_tag: ${{ steps.vars.outputs.sha_tag }}
         steps:
             - name: checkout source code
               uses: actions/checkout@v7
@@ -36,7 +36,7 @@ jobs:
 
             - name: determine SHA tag
               id: vars
-              run: echo "sha_tags=$(GITHUB_SHA::7)" >> $GITHUB_OUTPUT
+              run: echo "sha_tag=$(GITHUB_SHA::7)" >> $GITHUB_OUTPUT
 
 
             - name: build and push docker images
@@ -46,7 +46,7 @@ jobs:
                 file: ./frontend/Dockerfile
                 push: ${{ github.event_name == 'push' }}
                 load: ${{ github.event_name != 'push' }}
-                tags: rucini/helpdesk:frontend-v1:${{ steps.vars.outputs.sha_tags }} #your dockerhub username/repo name:tag
+                tags: rucini/helpdesk:frontend-v1:${{ steps.vars.outputs.sha_tag }} #your dockerhub username/repo name:tag
 
 
 
